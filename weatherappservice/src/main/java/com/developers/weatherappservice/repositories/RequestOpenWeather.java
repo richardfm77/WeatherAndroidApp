@@ -63,6 +63,7 @@ public class RequestOpenWeather {
      * */
     @SuppressWarnings("deprecation")
     public CityWeather getWeather(String cityName) {
+        CityWeather cityWeather = null;
         try {
             String url1 = "https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s&units=metric";
             String urlApikey = String.format(url1, cityName, apikey);
@@ -98,18 +99,22 @@ public class RequestOpenWeather {
                 String temp = jsonObject.getAsJsonObject("main").get("temp").getAsString();
                 String humidity = jsonObject.getAsJsonObject("main").get("humidity").getAsString();
 
-                return new CityWeather(city, lat, lon, temp, humidity);
+                cityWeather = new CityWeather(city, lat, lon, temp, humidity);
 
+            } else if (statusCode == HttpURLConnection.HTTP_NOT_FOUND) {
+                String ERROR_HTTP_NOT_FOUND = "Error city not found";
+                throw new RuntimeException(ERROR_HTTP_NOT_FOUND);
             } else {
-                System.out.println("Error request HTTP. Response code: " + statusCode);
+                String ERROR_REQUEST = "Error request";
+                System.err.println(ERROR_REQUEST);
             }
 
         } catch (IOException io) {
             String ERROR_REQUEST = "Error request";
-            error(ERROR_REQUEST);
+            System.err.println(ERROR_REQUEST);
         }
 
-       return new CityWeather(null, null, null, null, null);
+       return cityWeather;
     }
 
     /**
