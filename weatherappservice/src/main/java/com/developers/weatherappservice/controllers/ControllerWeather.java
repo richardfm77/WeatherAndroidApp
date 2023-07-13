@@ -3,10 +3,10 @@ package com.developers.weatherappservice.controllers;
 import com.developers.weatherappservice.models.CityWeather;
 import com.developers.weatherappservice.services.ServiceWeather;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 /**
  * Manges the urls.
  * */
@@ -28,4 +28,10 @@ public class ControllerWeather {
     public CityWeather getWeather(@PathVariable String cityName) {
         return serviceWeather.getWeather(cityName);
     }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<String> handleCustomException(RuntimeException runtimeException) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(runtimeException.getMessage());
+    }
+
 }
