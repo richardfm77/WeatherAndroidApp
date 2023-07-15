@@ -6,6 +6,9 @@ import com.developers.weatherappservice.repositories.RequestOpenWeather;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Manges the services of a weather.
  * */
@@ -37,4 +40,13 @@ public class ServiceWeather {
 
         return cityWeather;
     }
+
+    /**
+     * @return all the Weathers of the cache.
+     * */
+    public List<CityWeather> getWeathers() {
+        return new ArrayList<>(cache.values());
+    }
+
+
 }
