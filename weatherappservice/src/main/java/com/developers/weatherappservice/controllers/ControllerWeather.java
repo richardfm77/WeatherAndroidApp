@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Manges the urls.
  * */
@@ -27,6 +29,15 @@ public class ControllerWeather {
     @RequestMapping(value = "weather/{cityName}", method = RequestMethod.GET)
     public CityWeather getWeather(@PathVariable String cityName) {
         return serviceWeather.getWeather(cityName);
+    }
+
+    /**
+     * Manges the url: weathers.
+     * @return all the Weathers of the cache.
+     * */
+    @RequestMapping(value = "weathers")
+    public List<CityWeather> getWeathers() {
+        return serviceWeather.getWeathers();
     }
 
     @ExceptionHandler(RuntimeException.class)
