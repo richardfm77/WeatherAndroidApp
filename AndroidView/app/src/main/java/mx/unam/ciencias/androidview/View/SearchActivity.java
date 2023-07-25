@@ -1,4 +1,4 @@
-package mx.unam.ciencias.androidview;
+package mx.unam.ciencias.androidview.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +17,8 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
+
+import mx.unam.ciencias.androidview.R;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -44,6 +46,10 @@ public class SearchActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
                 textView.setVisibility(View.VISIBLE);
                 listView.setVisibility(View.INVISIBLE);
+                // extraer datos api y mostrarlos
+
+
+
                 return false;
             }
 
@@ -52,7 +58,7 @@ public class SearchActivity extends AppCompatActivity {
                 listView.setVisibility(View.VISIBLE);
                 textView.setVisibility(View.INVISIBLE);
                 adapter.getFilter().filter(newText);
-                // setear config
+
                 return false;
             }
         });

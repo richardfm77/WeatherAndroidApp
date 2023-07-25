@@ -1,4 +1,4 @@
-package mx.unam.ciencias.androidview;
+package mx.unam.ciencias.androidview.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import mx.unam.ciencias.androidview.R;
+
 public class MainActivity extends AppCompatActivity {
     private Button button;
     @Override
@@ -14,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         button = (Button) findViewById(R.id.button);
-        Intent intent = new Intent(this,SearchActivity.class);
+        Intent intent = new Intent(this, SearchActivity.class);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
